@@ -8,27 +8,25 @@
     <script src="https://unpkg.com/html5-qrcode"></script>
     <style>
       .result {
-        font-size: 2em;
+        font-size: 10em;
       }
     </style>
   </head>
   <body>
     <div id="qr-reader" width="600px"></div>
-    <div id="result" className="result">New Version 0.3</div>
-    <div id="log"></div>
+    <p id="result" style="font-size: 3rem">New Version 0.4</p>
 
     <script defer>
       const ICCID_MSISDN_MAP = {
-        [896503011905038380]: '93371254',
-        [896503051807010097]: 'not paid',
+        '896503011905038380': '93371254',
+        '896503051807010097': 'not paid',
       }
       function onScanSuccess(decodedText, decodedResult) {
         const result = document.getElementById('result')
         const log = document.getElementById('log')
         console.log(`Code scanned = ${decodedText}`, decodedResult)
-        if (Object.hasOwn(ICCID_MSISDN_MAP, JSON.stringify(decodedText))) {
+        if (Object.hasOwn(ICCID_MSISDN_MAP, decodedText)) {
           result.innerHTML = `Code scanned:${decodedText} -> ${ICCID_MSISDN_MAP[decodedText]}`
-          log.innerHTML = decodedResult
         } else {
           result.innerHTML = 'No valid code'
         }
