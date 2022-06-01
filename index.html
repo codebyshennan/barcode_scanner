@@ -9,14 +9,17 @@
   </head>
   <body>
     <div id="qr-reader" width="600px"></div>
+    <div id="result"></div>
 
-    <script>
+    <script defer>
       function onScanSuccess(decodedText, decodedResult) {
+        const result = document.getElementById('result')
         console.log(`Code scanned = ${decodedText}`, decodedResult)
+        result.innerHTML = `Code scanned = ${decodedText}`
       }
       var html5QrcodeScanner = new Html5QrcodeScanner('qr-reader', {
         fps: 10,
-        qrbox: 250
+        qrbox: 250,
       })
       html5QrcodeScanner.render(onScanSuccess)
     </script>
