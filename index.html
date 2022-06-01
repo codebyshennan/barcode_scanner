@@ -26,7 +26,7 @@
         const result = document.getElementById('result')
         const log = document.getElementById('log')
         console.log(`Code scanned = ${decodedText}`, decodedResult)
-        if (Object.hasOwn(ICCID_MSISDN_MAP, decodedText)) {
+        if (Object.hasOwn(ICCID_MSISDN_MAP, JSON.stringify(decodedText))) {
           result.innerHTML = `Code scanned:${decodedText} -> ${ICCID_MSISDN_MAP[decodedText]}`
           log.innerHTML = decodedResult
         } else {
