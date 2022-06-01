@@ -15,6 +15,7 @@
   <body>
     <div id="qr-reader" width="600px"></div>
     <div id="result" className="result">New Version 0.2</div>
+    <div id="log"></div>
 
     <script defer>
       const ICCID_MSISDN_MAP = {
@@ -23,9 +24,11 @@
       }
       function onScanSuccess(decodedText, decodedResult) {
         const result = document.getElementById('result')
+        const log = document.getElementById('log')
         console.log(`Code scanned = ${decodedText}`, decodedResult)
-        if (Object.hasOwnProperty.bind(ICCID_MSISDN_MAP)(decodedText)) {
+        if (Object.hasOwn(ICCID_MSISDN_MAP, decodedText)) {
           result.innerHTML = `Code scanned:${decodedText} -> ${ICCID_MSISDN_MAP[decodedText]}`
+          log.innerHTML = decodedResult
         } else {
           result.innerHTML = 'No valid code'
         }
