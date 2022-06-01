@@ -6,16 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/html5-qrcode"></script>
+    <style>
+      .result {
+        font-size: 2em;
+      }
+    </style>
   </head>
   <body>
     <div id="qr-reader" width="600px"></div>
-    <div id="result"></div>
+    <div id="result" className="result">New Version</div>
 
     <script defer>
+      const ICCID_MSISDN_MAP = {
+        [896503011905038380]: '93371254',
+        [896503051807010097]: 'not paid',
+      }
       function onScanSuccess(decodedText, decodedResult) {
         const result = document.getElementById('result')
         console.log(`Code scanned = ${decodedText}`, decodedResult)
-        result.innerHTML = `Code scanned = ${decodedText}`
+        if (Object.hasOwnProperty.bind(ICCID_MSISDN_MAP)(decodedText)) {
+          result.innerHTML = `Code scanned:${decodedText} -> ${ICCID_MSISDN_MAP[decodedText]}`
+        } else {
+          result.innerHTML = 'No valid code'
+        }
       }
       var html5QrcodeScanner = new Html5QrcodeScanner('qr-reader', {
         fps: 10,
